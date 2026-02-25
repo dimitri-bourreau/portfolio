@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 const externalLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dimitri-bourreau/' },
@@ -10,12 +11,9 @@ const externalLinks = [
   },
 ]
 
-const legalLinks = [
-  { label: 'CGV', href: '/cgv' },
-  { label: 'Mentions légales', href: '/mentions-legales' },
-]
-
 export function Footer() {
+  const t = useTranslations('footer')
+
   return (
     <footer className="border-border flex flex-col border-y md:flex-row md:items-center">
       <div className="flex flex-col md:flex-row">
@@ -30,15 +28,15 @@ export function Footer() {
         ))}
       </div>
       <div className="text-muted flex flex-wrap items-center justify-center gap-4 px-4 py-3 text-xs md:ml-auto">
-        {legalLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="hover:text-fg transition-colors"
-          >
-            {link.label}
-          </Link>
-        ))}
+        <Link href="/cgv" className="hover:text-fg transition-colors">
+          {t('cgv')}
+        </Link>
+        <Link
+          href="/mentions-legales"
+          className="hover:text-fg transition-colors"
+        >
+          {t('legal')}
+        </Link>
         <span>© 2026 Dimitri Bourreau</span>
       </div>
     </footer>

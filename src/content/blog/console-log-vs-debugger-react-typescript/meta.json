@@ -1,6 +1,0 @@
-{
-  "title": "Console.log ou debugger ? Ce que j'utilise selon le bug",
-  "date": "2026-02-12",
-  "excerpt": "J'ai longtemps cru que console.log suffisait. Et honnêtement, dans beaucoup de cas, c'est vrai. Mais après des années à débugger des applications React et TypeScript, j'ai découvert que le debugger apporte parfois une vision que console.log ne peut pas offrir. Dans cet article, je défends d'abord console.log, puis je montre ce que le debugger apporte de différent, et enfin je détaille comment débugger React et TypeScript concrètement.",
-  "tags": ["React", "TypeScript"]
-}

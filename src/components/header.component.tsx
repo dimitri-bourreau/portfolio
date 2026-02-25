@@ -1,17 +1,21 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { MobileNav } from './mobile-nav.component'
+import { LocaleSwitcher } from './locale-switcher.component'
 
-const navLinks = [
-  { label: 'Accueil', href: '/' },
-  { label: 'Dimitri', href: '/dimitri' },
-  { label: 'Expérience', href: '/experience' },
-  { label: 'Projets', href: '/projets' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Ressources', href: '/ressources' },
-  { label: 'Contact', href: '/contact' },
-]
+const navKeys = [
+  { key: 'home', href: '/' },
+  { key: 'dimitri', href: '/dimitri' },
+  { key: 'experience', href: '/experience' },
+  { key: 'projects', href: '/projets' },
+  { key: 'blog', href: '/blog' },
+  { key: 'resources', href: '/ressources' },
+  { key: 'contact', href: '/contact' },
+] as const
 
 export function Header() {
+  const t = useTranslations('nav')
+
   return (
     <header className="border-border relative flex items-center border-y">
       <Link
@@ -22,16 +26,19 @@ export function Header() {
       </Link>
       <MobileNav />
       <nav className="hidden overflow-hidden md:flex">
-        {navLinks.map((item) => (
+        {navKeys.map((item) => (
           <Link
             key={item.href}
             href={item.href}
             className="border-border hover:bg-accent hover:text-bg cursor-pointer border-r px-3 py-4 text-xs tracking-wider uppercase transition-colors lg:px-5"
           >
-            {item.label}
+            {t(item.key)}
           </Link>
         ))}
       </nav>
+      <div className="ml-auto hidden md:block">
+        <LocaleSwitcher />
+      </div>
     </header>
   )
 }

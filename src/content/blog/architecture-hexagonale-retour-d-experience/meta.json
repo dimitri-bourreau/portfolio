@@ -1,6 +1,0 @@
-{
-  "title": "Architecture hexagonale en frontend : retour d'expérience",
-  "date": "2026-02-08",
-  "excerpt": "L'architecture hexagonale peut rationnellement sembler propre au backend uniquement. Pourtant, j'utilise cette archi sur mes projets frontend depuis 2022 : un autre développeur freelance me l'avait présentée sur une mission client et après m'être gratté la tête pas mal de temps, j'ai vite saisi les avantages clairs à opter pour cette approche.",
-  "tags": ["React", "Architecture hexagonale"]
-}

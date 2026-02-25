@@ -1,18 +1,22 @@
+import { useTranslations } from 'next-intl'
+
 const services = [
-  { label: 'Refactoring & DX', color: 'bg-secondary' },
-  { label: 'Mentoring & pair programming', color: 'bg-tertiary' },
-  { label: 'Communication & documentation', color: 'bg-secondary' },
-  { label: 'Architecture hexagonale', color: 'bg-tertiary' },
-]
+  { key: 'refactoring', color: 'bg-secondary' },
+  { key: 'mentoring', color: 'bg-tertiary' },
+  { key: 'communication', color: 'bg-secondary' },
+  { key: 'hexagonal', color: 'bg-tertiary' },
+] as const
 
 export function ServicesPreview() {
+  const t = useTranslations('services')
+
   return (
     <section className="px-10">
       <ul className="space-y-2">
         {services.map((s) => (
-          <li key={s.label} className="flex items-center gap-2 text-sm">
+          <li key={s.key} className="flex items-center gap-2 text-sm">
             <span className={`${s.color} h-1.5 w-1.5`} />
-            {s.label}
+            {t(s.key)}
           </li>
         ))}
       </ul>

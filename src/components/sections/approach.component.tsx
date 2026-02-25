@@ -1,40 +1,45 @@
+import { useTranslations } from 'next-intl'
 import { SectionTitle } from '@/components/page-title.component'
 
 const differentiators = [
   {
-    title: 'Architecture hexagonale',
-    desc: "J'applique les principes de l'architecture hexagonale côté frontend : ports, adapters, découplage strict entre UI et logique métier.",
+    titleKey: 'hexagonal_title',
+    descKey: 'hexagonal_desc',
     color: 'border-l-accent',
   },
   {
-    title: 'Legacy & refactoring',
-    desc: 'Je prends plaisir à moderniser des codebases vieillissantes. Migration progressive, zéro régression, résultats mesurables.',
+    titleKey: 'legacy_title',
+    descKey: 'legacy_desc',
     color: 'border-l-secondary',
   },
   {
-    title: 'Mentorat',
-    desc: 'Accompagner les développeurs juniors et confirmés fait partie de mon quotidien. Revues de code bienveillantes, pair programming, montée en compétences.',
+    titleKey: 'mentoring_title',
+    descKey: 'mentoring_desc',
     color: 'border-l-tertiary',
   },
   {
-    title: 'Documentation',
-    desc: 'Je rédige une documentation technique claire et accessible. ADR, guides, onboarding : chaque décision est tracée et partagée.',
+    titleKey: 'documentation_title',
+    descKey: 'documentation_desc',
     color: 'border-l-accent',
   },
-]
+] as const
 
 export function ApproachSection() {
+  const t = useTranslations('approach')
+
   return (
     <section>
-      <SectionTitle>Ce qui me différencie</SectionTitle>
+      <SectionTitle>{t('title')}</SectionTitle>
       <div className="grid md:grid-cols-2 lg:grid-cols-4">
         {differentiators.map((a) => (
           <div
-            key={a.title}
+            key={a.titleKey}
             className={`border-border border-r border-b border-l-4 ${a.color} p-6`}
           >
-            <h3 className="mb-2 text-sm font-bold uppercase">{a.title}</h3>
-            <p className="text-muted text-xs leading-relaxed">{a.desc}</p>
+            <h3 className="mb-2 text-sm font-bold uppercase">
+              {t(a.titleKey)}
+            </h3>
+            <p className="text-muted text-xs leading-relaxed">{t(a.descKey)}</p>
           </div>
         ))}
       </div>

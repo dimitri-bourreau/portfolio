@@ -1,27 +1,22 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 const topArticles = [
+  { key: 'article1', slug: 'architecture-hexagonale-retour-d-experience' },
+  { key: 'article2', slug: 'refonte-next-en-6-mois' },
   {
-    title: "Architecture hexagonale en frontend : retour d'expérience",
-    slug: 'architecture-hexagonale-retour-d-experience',
-  },
-  {
-    title:
-      "Refonte Next.js en 6 mois : archi hexa, React Query, et surtout l'humain !",
-    slug: 'refonte-next-en-6-mois',
-  },
-  {
-    title:
-      "Comment j'ai divisé par 10 les temps de chargement d'une application Next.js",
+    key: 'article3',
     slug: 'comment-j-ai-divise-par-10-les-temps-de-chargement-d-une-app-next',
   },
-]
+] as const
 
 export function TopArticles() {
+  const t = useTranslations('topArticles')
+
   return (
     <section className="p-10">
       <h2 className="mb-3 text-xs font-bold tracking-widest uppercase">
-        Articles mis en avant
+        {t('title')}
       </h2>
       <div className="flex gap-2">
         {topArticles.map((article) => (
@@ -30,7 +25,7 @@ export function TopArticles() {
             href={`/blog/${article.slug}`}
             className="border-border hover:bg-accent hover:text-bg border px-3 py-2 text-xs transition-colors"
           >
-            {article.title}
+            {t(article.key)}
           </Link>
         ))}
       </div>

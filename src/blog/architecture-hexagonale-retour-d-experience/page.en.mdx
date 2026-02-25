@@ -1,0 +1,351 @@
+Hexagonal architecture might rationally seem like a backend-only concern. Yet, I've been using this architecture on my frontend projects since 2022: another freelance developer introduced it to me on a client project, and after scratching my head for quite a while, I quickly grasped the clear advantages of adopting this approach.
+
+Since then, I've been applying it systematically -- including on **Bon Vent**, my personal project for freelance prospecting tracking.
+
+In this article, I'm sharing several years of hands-on experience: why this architecture makes sense on the frontend, how I concretely implement it, and what it changes in day-to-day work.
+
+---
+
+## Initial observation
+
+You can picture many React projects as a nice blend of pretty much everything:
+
+```tsx
+// Le composant fait TOUT
+function CompanyList() {
+  const [companies, setCompanies] = useState([]);
+
+  useEffect(() => {
+    // Accès aux données
+    const db = await openDB('my-db');
+    const data = await db.getAll('companies');
+    // Logique métier
+    const filtered = data.filter(c => c.isFavorite);
+    const sorted = filtered.sort((a, b) => ...);
+    setCompanies(sorted);
+  }, []);
+
+  // Rendu UI
+  return <table>...</table>;
+}
+```
+
+It works!.. But it raises several problems:
+
+1. **Impossible to test** without spinning up the entire React environment.
+2. **Tight coupling**: switching IndexedDB for a REST API? That takes some serious elbow grease.
+3. **Duplication**: the same logic ends up in multiple components.
+
+---
+
+## What is hexagonal architecture?
+
+The core idea is simple: **make the interface, business logic, and external data retrieval independent from each other**.
+
+- The **domain** (business logic)
+- The **infrastructure** (databases, APIs)
+- The **interface** (React, Vue, CLI)
+
+Hexagonal architecture proposes isolating the domain at the center, and communicating with the outside world through **ports** (interfaces) and **adapters** (implementations).
+
+| Layer              | Role                     | Elements                          |
+| ------------------ | ------------------------ | --------------------------------- |
+| **Interface**      | Display and interactions | Components → Hooks → Services     |
+|                    | ↓                        |                                   |
+| **Domain**         | Business logic           | Types, Services, Business rules   |
+|                    | ↓                        |                                   |
+| **Infrastructure** | Data access              | IndexedDB, API REST, LocalStorage |
+
+**Ports** (interfaces) and **adapters** (implementations) bridge these layers together.
+
+---
+
+## How I applied it in Bon Vent
+
+### Project structure
+
+```
+features/                     # Logique métier par domaine
+├── companies/
+│   ├── api/
+│   │   ├── company.port.ts   # Interface (le contrat)
+│   │   ├── api.adapter.ts    # Implémentation IndexedDB
+│   │   └── fake.adapter.ts   # Implémentation mock (tests)
+│   ├── types/
+│   │   └── company.type.ts   # Types du domaine
+│   └── services/
+│       └── get-favorites.service.ts
+│
+hooks/                        # Interface React
+├── use-companies.hook.ts
+└── use-create-company.hook.ts
+│
+components/                   # UI pure
+├── organisms/
+│   └── CompanyList.tsx
+```
+
+### The Port: the contract
+
+The port defines **what the domain needs**, without knowing how it's implemented.
+
+```typescript
+// features/companies/api/company.port.ts
+export interface CompanyRepository {
+  getAll(): Promise<Company[]>
+  getById(id: string): Promise<Company | undefined>
+  getFavorites(): Promise<Company[]>
+  create(dto: CreateCompanyDTO): Promise<Company>
+  update(dto: UpdateCompanyDTO): Promise<Company>
+  delete(id: string): Promise<void>
+}
+```
+
+It's a TypeScript interface. Nothing more. No dependency, no implementation.
+
+### The Adapter: the implementation
+
+The adapter implements the port. Currently, I use IndexedDB:
+
+```typescript
+// features/companies/api/api.adapter.ts
+export class CompanyApiAdapter implements CompanyRepository {
+  async getAll(): Promise<Company[]> {
+    const db = await getDB()
+    return db.getAll('companies')
+  }
+
+  async getFavorites(): Promise<Company[]> {
+    const all = await this.getAll()
+    return all.filter((c) => c.isFavorite)
+  }
+
+  // ...
+}
+```
+
+Tomorrow, if I want to switch to a REST API? I create a new adapter:
+
+```typescript
+// features/companies/api/rest.adapter.ts
+export class CompanyRestAdapter implements CompanyRepository {
+  async getAll(): Promise<Company[]> {
+    const res = await fetch('/api/companies')
+    return res.json()
+  }
+  // ...
+}
+```
+
+**No other file to modify.** The domain and the interface haven't changed.
+
+This is a huge asset for both developer comfort and productivity: you can work on a feature at the same time as the backend without waiting for it to be developed -- you just need to build your adapter with mocked data.
+
+### The Service: business logic
+
+Services orchestrate the logic. They receive the adapter as a parameter (dependency injection).
+
+```typescript
+// features/companies/services/get-favorites.service.ts
+export function getFavorites(repository: CompanyRepository) {
+  return repository.getFavorites()
+}
+```
+
+Here, the service is trivial (pass-through). But for more complex cases, this is where the business logic lives:
+
+```typescript
+// features/companies/services/find-duplicates.service.ts
+export async function findDuplicates(
+  repository: CompanyRepository,
+  name: string,
+): Promise<Company[]> {
+  const all = await repository.getAll()
+  const normalized = name.toLowerCase().trim()
+  return all.filter((c) => {
+    const cName = c.name.toLowerCase().trim()
+    return cName.includes(normalized) || normalized.includes(cName)
+  })
+}
+```
+
+The duplicate detection logic is **in the domain**, not in a React component.
+
+Several highly appreciated advantages here, notably a strikingly easy time writing unit tests, code that naturally gravitates toward pure functions, and the obvious clarity when looking for where a particular piece of business logic lives.
+
+This business logic is what delivers the most value in the project -- it's what deserves the most care!
+
+### The Hook: the bridge to React
+
+Hooks bridge React and the domain.
+
+```typescript
+// hooks/use-favorites.hook.ts
+export function useFavorites() {
+  return useQuery({
+    queryKey: ['companies', 'favorites'],
+    queryFn: () => getFavorites(companyApiAdapter),
+  })
+}
+```
+
+The hook:
+
+- Injects the concrete adapter
+- Manages the cache (React Query)
+- Exposes a simple API to the component
+
+### The Component: pure UI
+
+The component knows nothing about the database. It receives data, it renders.
+
+```typescript
+// components/organisms/CompanyList.tsx
+export function CompanyList({ companies, emptyMessage }: Props) {
+  if (companies.length === 0) {
+    return <p>{emptyMessage}</p>;
+  }
+  return (
+    <table>
+      {companies.map((c) => <CompanyRow key={c.id} company={c} />)}
+    </table>
+  );
+}
+```
+
+---
+
+## Concrete benefits
+
+### 1. Testability
+
+I can test my business logic **without React**, **without a database**:
+
+```typescript
+// Avec un fake adapter
+const fakeAdapter: CompanyRepository = {
+  getAll: async () => [mockCompany1, mockCompany2],
+  // ...
+}
+
+test('findDuplicates detects similar names', async () => {
+  const duplicates = await findDuplicates(fakeAdapter, 'Acme')
+  expect(duplicates).toHaveLength(1)
+})
+```
+
+### 2. Maintainability
+
+Each file has **a single responsibility**:
+
+- `company.type.ts`: defines what a Company is
+- `get-favorites.service.ts`: retrieves favorites
+- `use-favorites.hook.ts`: exposes favorites to React
+
+When I'm hunting down a bug related to favorites, I know exactly where to look.
+
+### 3. Scalability
+
+Adding a feature always follows the same path:
+
+1. Add the type if needed
+2. Add the method to the port
+3. Implement it in the adapter
+4. Create the service
+5. Create the hook
+6. Use it in the component
+
+It's predictable. No surprises.
+
+### 4. Onboarding
+
+A new developer on the project immediately understands:
+
+- `features/` = business logic
+- `hooks/` = React interface
+- `components/` = UI
+
+The structure **documents** the architecture.
+
+---
+
+## Trade-offs
+
+Let's be honest, this approach has costs:
+
+### More files
+
+A simple "Company" CRUD generates:
+
+- 1 port
+- 2 adapters (real + fake)
+- 5-10 types
+- 5-10 services
+- 5-10 hooks
+
+For a side project, it's perhaps overkill. For an app that's going to live and evolve, it's an investment.
+
+### Learning curve
+
+The team needs to understand the concepts. Ports, adapters, dependency injection... It's not complex, but it requires some adjustment time.
+
+### Boilerplate
+
+Some services are simple pass-throughs:
+
+```typescript
+export function getAllCompanies(repository: CompanyRepository) {
+  return repository.getAll()
+}
+```
+
+You could call the adapter directly. But consistency has value: **everything goes through a service**, no exceptions.
+
+---
+
+## My conventions
+
+Over the course of the project, I've established a few rules:
+
+1. **One file = one responsibility**
+   - `get-all-companies.service.ts`, not `company.service.ts` with 20 functions
+
+2. **Explicit dependency injection**
+   - Services receive their adapter as a parameter
+   - Hooks inject the desired adapter
+
+3. **The domain depends on nothing**
+   - No React imports in `features/`
+   - No UI library imports
+
+4. **Strict types**
+   - No `any`, no `as unknown`
+   - If typing is difficult, it means the design needs revisiting
+
+I didn't apply this one in my Bon Vent project because it didn't make sense there, but otherwise this rule seems equally important to me:
+
+5. **Clear and exhaustive mocks**
+   - Incoming and outgoing data are mocked
+   - These mocks serve as living documentation for developers
+   - Bonus: by copying a real backend payload as a mock, the typing immediately validates its structure or raises an alert
+
+---
+
+## Conclusion
+
+Hexagonal architecture on the frontend -- it's possible. It's not the solution to every problem, but for an application that needs to:
+
+- Evolve over time
+- Be maintainable by a team
+- Have non-trivial business logic
+- Potentially change its infrastructure
+
+...it's a solid approach.
+
+For Bon Vent, it's clearly overkill, but it was an opportunity to guide Claude through my conception of this architecture step by step.
+
+The [source code is available on GitHub](https://github.com/dimitri-bourreau/bon-vent). Feel free to explore the structure and share your feedback.
+
+---
+
+_Working on a React project with complex business logic? Let's talk about it. I'm available for freelance engagements where this type of architecture makes a difference._

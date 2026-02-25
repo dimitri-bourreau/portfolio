@@ -1,0 +1,102 @@
+> This article is theoretical and intended for developers already familiar with the basics of React. We will discuss rendering, hydration, and Fibers.
+
+We used to talk about the Virtual DOM a long time ago, but is it still relevant? If a component is "rendered," what happens in memory and visually in the DOM? What are the best practices for improving rendering performance? Do I think useMemo should be avoided?
+
+After 6 years of actively using React, I decided to commit myself firmly to becoming an expert. Might as well share what I learn with you!
+
+## Is the Virtual DOM still a thing today?
+
+Yes, and it is still at the heart of React!
+
+The difference is that today we no longer compare DOM nodes with each other to identify the changes to apply.
+
+Things work a bit differently now thanks to React Fibers -- objects that bundle a component's data, including a reference to its DOM node, its input, and its output!
+
+- **Before React 16, in 2017** React compared DOM nodes with those of a virtual DOM, then modified the nodes that needed it. This worked, but it monopolized the main thread, and certain features were complicated to implement with this structure.
+- **With React 16, in 2017** React now compares Fibers instead. There was no significant performance advantage in switching to Fibers, but designing new features was simplified with this infrastructure. React 16 introduced Fragment and Portal, for example. Most importantly, Fibers opened the door to what the React team considered the future: asynchronous hydration!
+- **With React 18, in 2022** Hydration became asynchronous -- it became possible to prioritize, pause, or resume hydration! For example, if a user fills in an input while a form is being rendered, the form rendering will be paused or stopped and the input rendering will take priority. I see two main advantages here: a more responsive interface to user actions, and more flexible hydration that can free up the main thread.
+
+> I recommend reading [this article from Facebook's engineering blog](https://engineering.fb.com/2017/09/26/web/react-16-a-look-inside-an-api-compatible-rewrite-of-our-frontend-ui-library/) about rewriting React's core to implement Fibers!
+
+## Can we manually control hydration, prioritize it, or pause it ourselves?
+
+The introduction of Fibers was meant to be transparent for developers.
+
+You cannot manually pause hydration, but you can indicate what is not urgent to hydrate -- what can wait while another task takes priority.
+
+In practice, the action passed as a callback to startTransition is considered non-urgent. During the execution of this callback, other state changes will take priority. If a user fills in an input while an action is running, the input rendering will kick in without waiting for the action to finish.
+
+My take: like useMemo, this feature should only be used to address an actual problem. And most of the time, it is neither necessary nor useful.
+
+## When does a component render?
+
+A component render is scheduled:
+
+- On its initial display.
+- When one of its states is modified. The render is cancelled if the new value matches the previous one.
+- When one of its props is modified. The render is cancelled if the new value matches the previous one.
+
+I say "scheduled" because what follows is an evaluation of whether the render is actually needed. If the new render turns out to be unnecessary, no changes are applied and the DOM content remains as-is.
+
+## If a component re-renders, do its children necessarily re-render too?
+
+No! And recently, React has even optimized this with its compiler, which automatically improves memoization across the application.
+
+Let's save the compiler topic for later. First, how can you manually ensure that a re-rendered component's child does not re-render itself?
+
+- Wrap the child in a React.memo and keep the same props (shallow equality).
+- Wrap the child in a React.memo and pass a callback as the second argument that returns true. React.memo accepts a callback as its second argument that returns a boolean. This boolean indicates whether the previous props are identical to the new ones. In other words, returning true here prevents the component from re-rendering!
+
+Be aware: if a Context is updated and its value changes, the child will re-render regardless!
+
+## The automation brought by the recent React Compiler
+
+This optional compiler optimizes the React application at build time and focuses on automating memoization. In other words, it makes the manual use of React.memo, useCallback, and useMemo unnecessary.
+
+So, if you use this compiler, renders are automatically optimized!
+
+## useMemo, forget about it!
+
+If I have ever reviewed your code, you have probably seen the following comment from me:
+
+> useMemo or useCallback -- I really recommend using them only as a last resort. They are useful when there is a performance issue, when heavy computations are involved. Otherwise, they are a fairly common source of bugs and add complexity with no real value. [Even the official documentation says so!](https://react.dev/reference/react/useMemo)
+
+Now with the React Compiler, no more excuses!
+
+## And to wrap up, Next!
+
+Next.js has an interesting use of React from a rendering perspective.
+
+Setting aside server-rendered components, SSR, and SSG, I would like to focus on one specific topic: streaming.
+
+We saw that Fibers make it possible to precisely identify interface nodes and find the differences to apply.
+
+All of this normally happens on the client side: hydration never takes place on the server. In other words, everything runs via client-side JavaScript.
+
+Next, by default, sends HTML without the JS needed to hydrate it, performs the hydration work on the server side, then sends the differences to apply to the client. The result: the user sees the interface faster and gets the feeling that the site is faster and smoother.
+
+> Note: this is not ideal for every situation. There are regions of the world only covered by 2G networks, where we would prefer other approaches that optimize the number of requests and bundle sizes.
+
+## Conclusion
+
+React is a mature tool that continuously improves.
+
+Like JavaScript, React enables a lot of things. For conscientious developers, it is a remarkable tool that makes it easier to hit the mark when it comes to the sometimes very specific and complex needs of certain projects.
+
+It is a pleasure to explore this technology down to the depths of its source code, because the code is elegant and readable, because the documentation is exceptionally pleasant and rich, and because the developer community is massive and active.
+
+## Sources
+
+- [React Compiler](https://react.dev/learn/react-compiler)
+- [React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture)
+- [React v16.0](https://legacy.reactjs.org/blog/2017/09/26/react-v16.0.html)
+- [React v18](https://react.dev/blog/2022/03/29/react-v18)
+- [startTransition](https://react.dev/reference/react/startTransition)
+
+## Advanced side note: Fiber bitmasks, what a great idea!
+
+While studying React's internals, I discovered that React determines whether a Fiber object needs a new render using bitmasks. And I found the approach very interesting!
+
+[ReactFiberLane.js](https://github.com/facebook/react/blob/8d7b5e490320732f40d9c3aa4590b5b0ae5116f5/packages/react-reconciler/src/ReactFiberLane.js#L41)
+
+This use of bitmasks makes it possible, at very low cost, to precisely define which tasks remain to be done, then execute them in order of priority. All with a single variable -- magic!

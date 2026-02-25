@@ -1,6 +1,0 @@
-{
-  "title": "Thèmes sombres et clairs avec Tailwind : pièges courants et implémentation",
-  "date": "2025-12-09",
-  "excerpt": "Mon premier talk chez Human Talks Grenoble. Comment implémenter correctement les thèmes sombres et clairs avec Tailwind CSS, éviter le flash au chargement, et pourquoi le contraste est plus important que le thème lui-même.",
-  "tags": []
-}

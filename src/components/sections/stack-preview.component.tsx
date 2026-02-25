@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl'
+
 const stack = [
   'React',
   'Next.js',
@@ -14,10 +16,12 @@ const stack = [
 ]
 
 export function StackPreview() {
+  const t = useTranslations('stack')
+
   return (
     <section className="border-border border-b p-8">
       <h2 className="mb-4 text-xs font-bold tracking-widest uppercase">
-        Stack
+        {t('title')}
       </h2>
       <div className="flex flex-wrap gap-1">
         {stack.map((tech) => (

@@ -1,0 +1,65 @@
+I'm kind to AI. I take the time to craft my prompts carefully, with detail, sometimes even with a form of empathy. And I'm convinced it makes me more productive. In this article, I explore why — as a developer and former airline pilot student. Does the tone we use with AI change the quality of what it produces? Does it change the quality of what we ask? And is following its work step by step, like pair programming, better than letting it code on its own?
+
+## What aviation taught me about communication
+
+Before talking about code and AI, let's talk about cockpits. I trained for an airline transport pilot license, and that experience left a deep mark on me. Not just technically, but in how you communicate under pressure.
+
+[Crew Resource Management (CRM)](https://fr.wikipedia.org/wiki/Crew_resource_management) was born from a disaster. In 1977, two Boeing 747s collided on the runway at Tenerife: 583 dead. At the time, there was an authoritarian cockpit culture where co-pilots were less willing to contradict the captain. In 1979, NASA psychologist John Lauber formalized the concept: a set of training programs that structure communication, decision-making, and teamwork in the cockpit. By the 1990s, CRM had become a worldwide standard.
+
+What interests me here isn't aviation itself — it's the mechanism. CRM doesn't make pilots nicer. It structures communication: **you make things explicit, you confirm, you rephrase**.
+
+And that's exactly what I do when I craft a prompt carefully: make my intentions explicit, anticipate misunderstandings, check implicit assumptions. The kind tone is just a vehicle — the real variable is the **explicit structuring of the exchange**.
+
+## What if tone also changed the output?
+
+When you adopt a respectful tone with an LLM, it's tempting to tell yourself a story about reciprocity. As if politeness unlocked some form of goodwill on the machine's side. Obviously, an LLM doesn't feel gratitude. But that doesn't mean the tone of a prompt has zero effect on the output.
+
+An LLM generates text based on patterns learned from billions of human texts. And in those texts, there's a potential bias: when a human receives an instruction given with respect and clarity, we can assume that the work that follows tends to be higher quality.
+
+So we can put forward a hypothesis — unproven to this day but not absurd — that a prompt crafted with care and kindness statistically biases the model toward a more cooperative, more detailed, more methodical register. Not out of gratitude — **the model reproduces a pattern, not an emotion**.
+
+But even if this hypothesis turned out to be false, the main benefit lies elsewhere: entirely on the human side.
+
+## Cognitive load — the real mechanism
+
+When you write prompts in a dry, blunt way, without empathy, without taking the time to formulate them properly, you increase the chances of openly giving in to frustration. If a result is then disappointing, the next prompt can become "no, not that, redo it" or "you didn't understand anything."
+
+Without realizing it, you shift into a frustrated register, and that frustration has a real cost: our remarkable brain, partially tied up with emotional regulation, has less bandwidth for what actually matters — formulating precisely, detecting ambiguities, anticipating misunderstandings. Making kindness a habit in your prompts is a form of safeguard against this spiral.
+
+John Sweller's [cognitive load theory](https://fr.wikipedia.org/wiki/Charge_cognitive) provides a framework for this intuition. In short: our working memory is limited (a few items at a time), and anything that overloads it — including frustration — reduces what's left for useful work. When I'm annoyed because the AI broke my tests, I write my next prompt less effectively. Not because I lack skill, but because I lack bandwidth.
+
+Emotional regulation appears to consume cognitive resources, and those resources are in direct competition with the ones needed for precise formulation, ambiguity detection, and problem-solving. Maintaining a kind register with AI is a form of cognitive hygiene. It's not free-of-charge niceness — it's **attentional resource management**.
+
+## Empathy as a cognitive tool: theory of mind
+
+Putting yourself "in the AI's shoes," even if it's fictitious, activates a very real cognitive skill.
+
+In cognitive science, this is called [theory of mind](https://fr.wikipedia.org/wiki/Th%C3%A9orie_de_l%27esprit): the ability to represent what the other knows, believes, and wants.
+
+Applied to AI, this becomes very concrete. When I ask myself "is this instruction ambiguous for someone who doesn't have my context?", I'm doing exactly this kind of adjustment work. And it naturally produces better prompts — more explicit, less ambiguous, better contextualized.
+
+A blunt user who fires off a vague instruction doesn't make this effort. The bluntness isn't the problem — it's the communicational negligence that often comes with it. Being blunt and precise works. Being blunt and vague is a disaster.
+
+Empathy toward AI isn't sentimentalism. It's a cognitive hack to force yourself to think from the receiver's perspective.
+
+## Staying in control: the other form of attention
+
+Beyond tone, there's another practice I advocate for: limiting auto-edit mode as much as possible when working with AI. Following each change step by step, in real time.
+
+It might seem inefficient. It's the opposite.
+
+By following each decision, I maintain a living mental model of the codebase. I can intervene immediately when the AI goes in the wrong direction. And most importantly, I can ask the question that turns the interaction into a learning opportunity: "Oh, you did that there — why? Tell me about this pattern. What's this API?"
+
+- Feedback is immediate: I see the edit live.
+- Tasks are well-defined: each change is a micro-problem.
+- Engagement is active: I'm not a spectator, I'm a co-pilot.
+
+The alternative — letting the AI code and then reviewing after the fact — breaks this cycle. Let's be honest: that review is never really done well. You skim, you approve in bulk, you move on.
+
+My approach: small commits, frequent checkpoints, close follow-up. What I lose in raw speed, I gain back in understanding, in quality, and in the ability to roll back cleanly when something goes off the rails. And with each session, I genuinely learn my codebase. Which makes me faster in the long run.
+
+## What actually matters
+
+Kindness toward AI is neither sentimentalism nor superstition. It's **a reliable proxy for a set of cognitive practices that genuinely improve the quality of the work produced**: cognitive load management, conservation of self-regulation resources, modeling of the interlocutor, explicit structuring of exchanges, and active engagement in learning.
+
+The mechanism is entirely in our heads. And that's precisely why it works.

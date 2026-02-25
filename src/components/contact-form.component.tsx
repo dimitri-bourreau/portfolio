@@ -1,32 +1,34 @@
 'use client'
 
 import { useActionState } from 'react'
-import { sendContactEmail } from '@/app/contact/action'
+import { useTranslations } from 'next-intl'
+import { sendContactEmail } from '@/app/[locale]/contact/action'
 
-const situations = [
-  "Renfort d'équipe",
-  'Projet from scratch',
-  'Refonte / Migration',
-  'Refactoring & DX',
-  'Audit technique',
-  'Autre',
-]
+const situationKeys = [
+  'situation1',
+  'situation2',
+  'situation3',
+  'situation4',
+  'situation5',
+  'situation6',
+] as const
 
 const inputClass =
   'border-border bg-bg focus:border-fg w-full border px-4 py-3 text-sm outline-none'
 const labelClass = 'mb-2 block text-xs font-bold tracking-widest uppercase'
 
 export function ContactForm() {
+  const t = useTranslations('contact')
   const [state, action, pending] = useActionState(sendContactEmail, {
     success: false,
-    error: null,
+    errorCode: null,
   })
 
   if (state.success) {
     return (
       <div className="flex items-center justify-center p-12">
         <p className="text-sm font-bold tracking-widest uppercase">
-          Message envoyé. Je reviens vers vous rapidement.
+          {t('formSuccess')}
         </p>
       </div>
     )
@@ -34,16 +36,16 @@ export function ContactForm() {
 
   return (
     <form action={action} className="space-y-6">
-      {state.error && (
+      {state.errorCode && (
         <p className="border-fg bg-accent/20 border px-4 py-3 text-xs">
-          {state.error}
+          {t(state.errorCode)}
         </p>
       )}
 
       <div className="grid gap-6 md:grid-cols-2">
         <div>
           <label htmlFor="name" className={labelClass}>
-            Nom *
+            {t('formName')}
           </label>
           <input
             id="name"
@@ -55,7 +57,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="email" className={labelClass}>
-            Email *
+            {t('formEmail')}
           </label>
           <input
             id="email"
@@ -69,24 +71,24 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="company" className={labelClass}>
-          Entreprise
+          {t('formCompany')}
         </label>
         <input id="company" name="company" type="text" className={inputClass} />
       </div>
 
       <div>
         <label htmlFor="situation" className={labelClass}>
-          Votre situation
+          {t('formSituation')}
         </label>
         <select
           id="situation"
           name="situation"
           className={`${inputClass} cursor-pointer`}
         >
-          <option value="">Sélectionnez</option>
-          {situations.map((s) => (
-            <option key={s} value={s}>
-              {s}
+          <option value="">{t('formSelect')}</option>
+          {situationKeys.map((key) => (
+            <option key={key} value={t(key)}>
+              {t(key)}
             </option>
           ))}
         </select>
@@ -94,7 +96,7 @@ export function ContactForm() {
 
       <div>
         <label htmlFor="message" className={labelClass}>
-          Votre projet *
+          {t('formMessage')}
         </label>
         <textarea
           id="message"
@@ -110,7 +112,7 @@ export function ContactForm() {
         disabled={pending}
         className="bg-accent text-bg hover:bg-bg hover:text-accent border-accent cursor-pointer border px-8 py-3 text-xs font-bold tracking-widest uppercase transition-colors disabled:opacity-50"
       >
-        {pending ? 'Envoi en cours...' : 'Envoyer ma demande'}
+        {pending ? t('formSending') : t('formSubmit')}
       </button>
     </form>
   )

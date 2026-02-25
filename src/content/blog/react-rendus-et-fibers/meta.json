@@ -1,6 +1,0 @@
-{
-  "title": "React.js : Regard théorique sur les rendus et les Fibers",
-  "date": "2025-08-28",
-  "excerpt": "On parlait de Virtual DOM il y a longtemps, mais est-ce toujours actuel ? Si un composant est « rendu » que se passe-t-il en mémoire et visuellement dans le DOM ? Quelles sont les bonnes pratiques pour améliorer les performances liées aux rendus ?",
-  "tags": ["React", "Performances"]
-}

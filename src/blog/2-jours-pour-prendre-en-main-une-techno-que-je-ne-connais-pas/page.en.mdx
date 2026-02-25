@@ -1,0 +1,116 @@
+I've been a React.js developer for 6 years. This week, I took a technical test for a company whose stack is PHP / Symfony / Vue.js. I didn't know any of these three technologies. I had two days to prepare, and the test satisfied the company.
+
+This article is not a PHP or Vue tutorial. It's a retrospective on the method I used to learn three unfamiliar technologies in a very short time, leveraging official documentation, conversations with an AI, and a highly structured workflow with Claude Code.
+
+## The context
+
+When I found out the stack was PHP/Symfony/Vue, my first reaction was honest: I knew nothing about any of them. PHP -- I had a somewhat outdated image of it. Symfony, I didn't know at all beyond the name, even though I have a friend who's been a developer for 15 years and is an expert on it. Vue.js, I had tried it 3 or 4 years ago out of curiosity, played around a bit, but my knowledge was dated and superficial.
+
+I had two days. No time to take a 40-hour course. I needed a structured approach that would capitalize on what I already knew (React, TypeScript, Node.js, hexagonal architecture) to learn as efficiently as possible.
+
+## Phase 1: read the official documentation
+
+**Read the docs first.** Not a Medium article, not a YouTube tutorial -- the official documentation.
+
+Why the docs first? Because they don't take shortcuts. They don't assume what you already know. And most importantly, they give you the exact vocabulary. When you later discuss things with an AI or a colleague, you'll know how to name what you're looking for.
+
+I read the PHP documentation exhaustively and the first half of the Symfony documentation. I found the PHP docs heavy, with a dated interface, but I don't regret it: that reading is what allowed me to understand fundamental things about PHP's execution model. The rest of Symfony and the Vue.js docs, I skimmed. For Symfony, because I had no intention of becoming an expert in a few hours. For Vue.js, because my JS/front-end expertise made skimming sufficient.
+
+That deep reading of the PHP docs paid off directly in the interview. I was able to spontaneously talk about the fact that PHP has no event loop, that a request is a process that disappears when it's done, and that libraries exist to add async capabilities, but they remain niche. I probably wouldn't have reached that level of understanding by skimming a blog post.
+
+Another example: the PHP docs claimed that the language could do everything. I wasn't convinced, and I discussed it with Claude, which refined my understanding. PHP excels at synchronous request/response web work, but for AI, video processing, or websockets, that's a different story. This kind of critical thinking in response to documentation is what transforms passive reading into active learning.
+
+## Phase 2: testing my understanding with Claude
+
+After reading, I opened a conversation with Claude. Not to ask for a lecture, but to **test what I had retained** and ask the questions that the documentation had raised.
+
+The exchange took the form of a progressive quiz. Claude would ask me questions, from the simplest to the most complex, and I would answer with what I knew. When I was wrong, it corrected me. When I was right, it added context.
+
+For example, on PHP:
+
+"How do you declare a variable?": Easy, `$var = ...`. But the discussion drifted toward scoping (block-scoped in JS, function-scoped in PHP), and the fact that a PHP function doesn't have access to its parent scope variables by default. Things I had read that were now consolidating in my mind.
+
+"What's the difference between `==` and `===`?": Claude showed me that the coercion rules are different: `"1" == "01"` returns `true` in PHP (numeric comparison), `false` in JS. PHP 8 cleaned up quite a few absurd cases, but the pitfalls remain different.
+
+This question/answer format has a huge advantage: it forces you to articulate your understanding. **Until you've tried to answer, you can't precisely see the boundaries of your knowledge.**
+
+## Phase 3: generating targeted exercises
+
+This is the part I find most useful to share. Rather than searching for generic exercises online, I asked Claude to generate a series of exercises tailored to my profile: a React/TypeScript/Node developer who needs to learn PHP/Symfony (and separately, Vue.js).
+
+Here's the prompt I used, which you can adapt:
+
+---
+
+You are a senior PHP/Symfony developer.
+
+I've been a React/TypeScript/Next.js developer for 6 years. I'm well-versed in hexagonal architecture, testing, and teamwork. I don't know PHP or Symfony, but I've read their documentation.
+
+Generate a series of 20 progressive exercises for me to learn PHP/Symfony, building on my existing knowledge.
+
+Constraints:
+
+- The exercises should go from the simplest (hello world, routing) to the most advanced (functional tests, professional patterns, codebase reading).
+- Each exercise must include:
+  1. A concrete task description (what I need to code).
+  2. A "Direction": a paragraph that bridges what I know in React/Node with the equivalent Symfony/Vue concept. Not a lecture, just the mental link to move faster.
+  3. A "Review prompt": a ready-to-copy prompt that I'll give to an AI to review my code and provide code review feedback.
+- Group the exercises by levels (getting started, structuring, database, advanced patterns, professional codebase).
+- The last exercise should be reading and analyzing a professional open-source codebase.
+- Include a testing exercise.
+
+---
+
+This prompt generated series of 20 exercises for each technology, with a natural progression. The "Directions" consistently bridged concepts with React/Node, which saved me a considerable amount of time. Instead of starting from scratch, I was building on what I already knew.
+
+## Phase 4: coding with Claude Code in pair programming
+
+I started the exercises manually, reading the docs and discussing with Claude whenever I got stuck. Then I switched to Claude Code with my usual work habits.
+
+My workflow with Claude Code is highly structured:
+
+- Small iterations.
+- No auto-edit: Claude Code suggests, I approve or reject. Every change goes through my review. If I don't understand a line, I ask before accepting.
+- Systematic review: I challenge decisions. "Why `extends AbstractController` here when we're not using it?" "Why a `requirements` on the route?" Every "why" is an opportunity to learn a concept.
+- Constant questions: "What does `protected` do here?" "What's the difference between `->` and `::`?" "Why backslashes in namespaces?" These micro-questions accumulate and end up building a solid understanding.
+- Clear the context after each task. Once a task is done, I clear Claude Code's context. It forces a clean restart and prevents the AI from clinging to decisions made in a previous context.
+
+This is not vibe coding. It's pair programming with a senior developer who knows the stack inside out and has infinite patience. The difference from real pair programming is that I can ask the same question three times without anyone rolling their eyes.
+
+## What I learned about PHP/Symfony
+
+A few takeaways from this express immersion.
+
+PHP 8 is a much more modern language than some hallway rumors suggest. Strict typing, `readonly class`, enums, union types -- it's serious. Coupled with PHPStan for static analysis, you get a rigor comparable to TypeScript in day-to-day work.
+
+Symfony is well-structured. Dependency injection via autowiring, attribute-based routing, Doctrine ORM, console commands, the event system: every component is designed to fit together cleanly. I also discovered that Symfony closely resembles Nest.js, which helped me find my footing fairly quickly.
+
+PHP's "share nothing" model is disorienting at first, then liberating. No event loop, no shared state between requests, no memory leaks between processes. It's a simplification, not a limitation.
+
+Server-side forms surprised me. No `useState`, no `fetch`: the browser does a classic POST, Symfony validates and redirects. The approach is efficient and elegant. I'm still a Next.js devotee, and I find this approach a bit dated from a UX perspective, but in terms of development efficiency, it's formidable.
+
+## What I learned about Vue.js
+
+Vue's reactivity is more intuitive than React's. You mutate directly with `count.value++`, no need for a setter.
+
+`computed()` provides automatic caching (the value is only recalculated when its dependencies change, not on every cycle). `watch()` is the equivalent of `useEffect`, but without its classic pitfalls: no dependency array to maintain manually (in React, forgetting a dependency in the `useEffect` array causes silent bugs). Vue handles dependency tracking automatically.
+
+Pinia is a lightweight global store. For those familiar with Redux or MobX, it's a relief: a store uses the same primitives as components (`ref`, `computed`), no reducer boilerplate.
+
+## The result
+
+In two days, I completed 15 PHP/Symfony exercises and 10 Vue.js exercises. On the PHP side, I also went a bit further: I added unit tests and functional tests (the latter used an ephemeral SQLite database). I built a complete CRUD with Doctrine, a multi-service Docker Compose setup, Twig templates, Event Subscribers, and console commands. On the Vue side, I covered reactivity, routing, composables, Pinia, and API calls.
+
+The technical test satisfied the company. Not because I had become an expert in two days (I clearly hadn't), but because I had a structured understanding of the concepts, I knew where to look, and I could discuss technical choices with informed perspective. I was also commended for my strong curiosity, which reinforced my approach: **ask lots of questions and understand the "why" rather than just making the code work.**
+
+## What I recommend
+
+**Read the official documentation.** It's the most boring and most effective advice. Not a summary, not an article -- the docs. Even if they're heavy and dated like PHP's.
+
+**Test your understanding out loud.** Whether with Claude, a colleague, or with your eyes closed. Articulating what you've understood reveals what you haven't.
+
+**Generate exercises tailored to your profile.** The prompt I shared above will save you hours. Exercises that bridge what you know and what you're learning are infinitely more effective than generic ones.
+
+**Use AI as a pair, not as an automaton.** Small iterations, systematic review, constant questions, and clear the context after each task.
+
+**Embrace the discomfort.** Learning a new stack in two days means accepting that you won't understand everything. The goal isn't mastery -- it's the ability to navigate the code, ask the right questions, and learn fast once you're on the job.

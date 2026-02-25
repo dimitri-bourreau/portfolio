@@ -1,0 +1,13 @@
+{
+  "date": "2025-09-19",
+  "fr": {
+    "title": "Refonte Next.js en 6 mois : archi hexa, React Query, et surtout l'humain !",
+    "excerpt": "L'application Next.js souffrait. Certaines pages mettaient plus de dix secondes à charger. 6 mois plus tard, on était passé sous la seconde sur ces écrans critiques. Mais le vrai apprentissage de cette mission n'était pas technique — il était humain.",
+    "tags": ["React", "Refactoring", "Étude de cas"]
+  },
+  "en": {
+    "title": "Next.js overhaul in 6 months: hexagonal architecture, React Query, and above all the human side!",
+    "excerpt": "The Next.js application was suffering. Some pages took over ten seconds to load. 6 months later, we were under a second on those critical screens. But the real lesson from this project wasn't technical — it was human.",
+    "tags": ["React", "Refactoring", "Case study"]
+  }
+}

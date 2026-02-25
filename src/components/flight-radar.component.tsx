@@ -1,71 +1,29 @@
-const milestones = [
-  {
-    id: 'SITE DU ZÉRO',
-    x: 6,
-    y: 88,
-    year: '2007',
-    desc: "J'apprends l'HTML, le CSS et PHP avec le Site du Zéro dans le CDI du lycée",
-  },
-  {
-    id: 'SORTIE DE LA RUE',
-    x: 12,
-    y: 75,
-    year: '2009',
-    desc: 'Une fois sorti des foyers, je fais mes premiers boulots pour quitter la rue',
-  },
-  {
-    id: 'TOKYO',
-    x: 20,
-    y: 62,
-    year: '2013',
-    desc: "En m'envolant vers Tokyo je tombe amoureux des avions ! 🛫",
-  },
-  {
-    id: 'PILOTE',
-    x: 28,
-    y: 50,
-    year: '2014',
-    desc: "Sans bac ni argent, j'apprends à voler sur Bordeaux pour devenir pilote de ligne",
-  },
-  {
-    id: 'RECONVERSION',
-    x: 36,
-    y: 60,
-    year: '2017',
-    desc: 'Inapte au vol pour mes yeux, je rejoins Openclassrooms pour me former au métier de dev frontend',
-  },
-  {
-    id: 'FREELANCE',
-    x: 44,
-    y: 48,
-    year: '2019',
-    desc: 'Je créé ma micro-entreprise et je deviens freelance',
-  },
-  { id: 'MALT', x: 52, y: 38, year: '2020', desc: "J'arrive sur Malt" },
-  {
-    id: 'SUCCÈS',
-    x: 68,
-    y: 25,
-    year: '2023',
-    desc: "Je cumule 40 missions sur Malt avec une note de 5/5, je créé une EURL parce que mon chiffre d'affaires ne convient plus à celui d'une micro-entreprise ! 👏",
-  },
-  {
-    id: 'PAUSE',
-    x: 78,
-    y: 32,
-    year: '2024',
-    desc: "L'année 2024 était accompagnée d'une santé dégradée, une pause professionnelle sur toute l'année m'a permis de faire de cette épreuve une histoire du passé",
-  },
-  {
-    id: 'HUMAN TALKS',
-    x: 88,
-    y: 18,
-    year: '2025',
-    desc: 'Je reprends mon activité, et je fais mon premier talk avec Human Talks !',
-  },
-]
+import { useTranslations } from 'next-intl'
+
+const milestonePositions = [
+  { n: 1, x: 6, y: 88 },
+  { n: 2, x: 12, y: 75 },
+  { n: 3, x: 20, y: 62 },
+  { n: 4, x: 28, y: 50 },
+  { n: 5, x: 36, y: 60 },
+  { n: 6, x: 44, y: 48 },
+  { n: 7, x: 52, y: 38 },
+  { n: 8, x: 68, y: 25 },
+  { n: 9, x: 78, y: 32 },
+  { n: 10, x: 88, y: 18 },
+] as const
 
 export function FlightRadar() {
+  const t = useTranslations('flightRadar')
+
+  const milestones = milestonePositions.map((pos) => ({
+    id: t(`milestone${pos.n}_id`),
+    x: pos.x,
+    y: pos.y,
+    year: t(`milestone${pos.n}_year`),
+    desc: t(`milestone${pos.n}_desc`),
+  }))
+
   return (
     <div className="relative h-full w-full overflow-hidden">
       {/* Grid lines */}
@@ -195,7 +153,7 @@ export function FlightRadar() {
       <div className="text-muted absolute top-4 left-4 font-mono text-[11px]">
         <div>LAT 45.1885°N</div>
         <div>LON 5.7245°E</div>
-        <div className="text-accent mt-1 font-bold">GRENOBLE</div>
+        <div className="text-accent mt-1 font-bold">{t('grenoble')}</div>
       </div>
       <div className="text-muted absolute right-4 bottom-4 text-right font-mono text-[10px]">
         <div>UTC+1</div>

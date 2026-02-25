@@ -1,0 +1,13 @@
+{
+  "date": "2026-02-20",
+  "fr": {
+    "title": "2 jours pour prendre en main une techno que je ne connais pas",
+    "excerpt": "Je suis développeur React.js depuis 6 ans. Cette semaine, j'ai passé un test technique pour une entreprise dont la stack est PHP / Symfony / Vue.js. Je ne connaissais aucune de ces trois technos. J'ai eu deux jours pour me préparer, et le test a satisfait l'entreprise.",
+    "tags": ["PHP", "Symfony", "Vue.js", "Apprentissage"]
+  },
+  "en": {
+    "title": "2 days to get up to speed with a tech stack I didn't know",
+    "excerpt": "I've been a React.js developer for 6 years. This week, I took a technical test for a company whose stack is PHP / Symfony / Vue.js. I didn't know any of these three technologies. I had two days to prepare, and the test satisfied the company.",
+    "tags": ["PHP", "Symfony", "Vue.js", "Learning"]
+  }
+}

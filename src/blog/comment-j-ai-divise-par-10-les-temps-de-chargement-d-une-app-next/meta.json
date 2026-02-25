@@ -1,0 +1,13 @@
+{
+  "date": "2026-02-09",
+  "fr": {
+    "title": "Comment j'ai divisé par 10 les temps de chargement d'une application Next.js",
+    "excerpt": "Des pages qui mettent plus de dix secondes à charger, des rerenders nombreux et curieux, des bugs absurdes... On est nombreux à connaître cette peinture. Quand je suis arrivé sur cette mission, l'application — un outil de reporting pour le suivi de travaux publics — était dans cet état. 6 mois plus tard, les pages critiques chargeaient en moins d'une seconde.",
+    "tags": ["React", "Architecture hexagonale", "Refactoring", "Étude de cas"]
+  },
+  "en": {
+    "title": "How I cut a Next.js application's load times by 10x",
+    "excerpt": "Pages taking over ten seconds to load, numerous and puzzling rerenders, absurd bugs... Many of us know this picture. When I joined this project, the application — a reporting tool for public works monitoring — was in this state. 6 months later, critical pages were loading in under a second.",
+    "tags": ["React", "Hexagonal architecture", "Refactoring", "Case study"]
+  }
+}
