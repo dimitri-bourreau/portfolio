@@ -172,6 +172,7 @@
     "validcq_desc": "NPM package to validate French social security numbers (NIR/NIRPP)."
   },
   "resources": {
+    "title": "Resources",
     "courses": "Online courses",
     "videos": "Videos",
     "books": "Books",

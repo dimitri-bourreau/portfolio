@@ -1,6 +1,5 @@
 import { type Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { SectionTitle } from '@/components/page-title.component'
 
 export const metadata: Metadata = { title: 'Ressources' }
 
@@ -131,18 +130,20 @@ function ResourceSection({
   t: (key: string) => string
 }) {
   return (
-    <section className="border-border border-b">
-      <SectionTitle>{sectionTitle}</SectionTitle>
-      <div className="-mt-px grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <section className="mb-10">
+      <h2 className="text-accent mb-4 text-xs font-bold tracking-widest uppercase">
+        {sectionTitle}
+      </h2>
+      <div className="flex flex-col">
         {items.map((item) => (
           <a
             key={item.url}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border hover:bg-accent hover:text-bg group -mr-px -mb-px block cursor-pointer border-r border-b p-8 transition-colors"
+            className="border-border hover:bg-accent hover:text-bg group flex gap-6 border-b px-4 py-4 transition-colors"
           >
-            <h3 className="mb-2 text-sm font-bold uppercase">
+            <h3 className="w-48 shrink-0 text-sm font-bold uppercase">
               {item.titleKey ? t(item.titleKey) : item.title}
             </h3>
             <p className="text-muted group-hover:text-bg text-xs leading-relaxed">
@@ -160,9 +161,16 @@ export default async function RessourcesPage() {
 
   return (
     <>
-      <ResourceSection sectionTitle={t('courses')} items={courses} t={t} />
-      <ResourceSection sectionTitle={t('videos')} items={videos} t={t} />
-      <ResourceSection sectionTitle={t('books')} items={books} t={t} />
+      <div className="text-accent border-border border-l-accent flex items-center justify-between border-b border-l-4 px-8 py-6">
+        <h1 className="text-lg font-bold tracking-widest uppercase">
+          {t('title')}
+        </h1>
+      </div>
+      <div className="mx-auto w-full max-w-4xl px-8 py-10">
+        <ResourceSection sectionTitle={t('courses')} items={courses} t={t} />
+        <ResourceSection sectionTitle={t('videos')} items={videos} t={t} />
+        <ResourceSection sectionTitle={t('books')} items={books} t={t} />
+      </div>
     </>
   )
 }

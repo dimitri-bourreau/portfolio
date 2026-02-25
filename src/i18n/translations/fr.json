@@ -172,6 +172,7 @@
     "validcq_desc": "Package NPM pour valider les numéros de sécurité sociale français (NIR/NIRPP)."
   },
   "resources": {
+    "title": "Ressources",
     "courses": "Cours en ligne",
     "videos": "Vidéos",
     "books": "Livres",
