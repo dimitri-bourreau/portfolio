@@ -55,6 +55,14 @@ const projects: Project[] = [
     stack: ['Next.js', 'React', 'TypeScript', 'Tailwind'],
   },
   {
+    name: "Le temps d'une vie",
+    descKey: 'letempsduvie_desc',
+    url: 'https://le-temps-d-une-vie.vercel.app/',
+    github: 'https://github.com/dimitri-bourreau/le-temps-d-une-vie',
+    image: '/projets/le-temps-d-une-vie.png',
+    stack: ['Next.js', 'React', 'TypeScript', 'Tailwind'],
+  },
+  {
     name: 'Starrymusic',
     descKey: 'starrymusic_desc',
     url: 'https://www.starrymusic.fr',
