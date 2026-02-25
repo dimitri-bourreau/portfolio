@@ -17,6 +17,7 @@ type Experience = {
 }
 
 const experiences: Experience[] = [
+  { company: 'Theia', period: '2026', highlightKey: 'theia' },
   { company: 'VISEO', period: '2025', highlightKey: 'viseo' },
   { company: 'Tudigo', period: '2023-2024', highlightKey: 'tudigo' },
   {
@@ -41,8 +42,15 @@ const experiences: Experience[] = [
 ]
 
 const skills: Record<string, string[]> = {
-  'front-end': ['React.js', 'Next.js', 'AngularJS', 'TailwindCSS', 'Figma'],
-  'back-end': ['Node.js', 'NestJS', 'API REST'],
+  'front-end': [
+    'React.js',
+    'Next.js',
+    'Vue.js',
+    'AngularJS',
+    'TailwindCSS',
+    'Figma',
+  ],
+  'back-end': ['Node.js', 'NestJS', 'Symfony', 'API REST'],
   devops: ['GitLab', 'Microsoft Azure'],
 }
 

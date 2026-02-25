@@ -11,12 +11,9 @@
     "close": "Fermer"
   },
   "hero": {
-    "available": "Disponible",
     "title": "Dimitri Bourreau",
-    "subtitle": "Développeur frontend React & Next.js",
-    "description": "6 ans d'expérience, +40 missions freelance, 5/5 sur Malt. Je m'intègre vite, je livre, je transmets.",
-    "location": "Télétravail · Grenoble · Lyon",
-    "cta": "Discutons de votre projet"
+    "subtitle": "Développeur fullstack passionné",
+    "description": "Je partage mes connaissances, mes études de cas et mes projets. Besoin d'un conseil ? Je vous oriente."
   },
   "services": {
     "refactoring": "Refactoring & DX",
@@ -110,6 +107,7 @@
     "parcours": "Parcours",
     "competences": "Compétences",
     "caseStudies": "Études de cas",
+    "theia": "Développeur fullstack Symfony & Vue.js sur une plateforme d'évaluation et d'examen en ligne sécurisée.",
     "viseo": "Architecture hexagonale pour une application React en environnement bancaire. Documentation technique adoptée comme référence interne.",
     "tudigo": "Architecture hexagonale et monorepo NX pour moderniser le site. Pair programming et revues de code.",
     "artelia": "Refactoring complet d'une application React, performances x10. Mentorat d'un développeur junior vers le freelancing.",
@@ -126,7 +124,7 @@
   },
   "dimitri": {
     "title": "À propos de Dimitri",
-    "p1": "Je m'appelle Dimitri. Je suis développeur frontend depuis 2019, basé à Grenoble, au pied des montagnes.",
+    "p1": "Je m'appelle Dimitri. Je suis développeur fullstack depuis 2019, basé à Grenoble, au pied des montagnes.",
     "p2": "Mon parcours n'est pas linéaire, j'en suis fier et mon histoire décrit bien la personne et le professionnel que je suis aujourd'hui.",
     "p3": "Placé à l'Aide Sociale à l'Enfance, j'ai dût construire ma vie brique par brique avec résilience et ténacité.",
     "p4": "Au lycée, j'apprenais avec Le Site du Zéro à jouer avec PHP : j'étais certain de devenir dev, et j'avais hâte ! Sauf qu'en allant à Tokyo en 2013 je me suis découvert un amour encore plus brûlant pour l'aviation. Je n'avais pas le bac et mon portefeuille était vide, mais j'ai travaillé très dur pour devenir pilote de ligne. Tout laissait penser que c'était hors de ma portée, mais j'ai ignoré tous les préjugés et les barrières pour parier sur moi-même et ma détermination.",

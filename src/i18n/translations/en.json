@@ -11,12 +11,9 @@
     "close": "Close"
   },
   "hero": {
-    "available": "Available",
     "title": "Dimitri Bourreau",
-    "subtitle": "Frontend developer React & Next.js",
-    "description": "6 years of experience, 40+ freelance missions, 5/5 on Malt. I integrate fast, I deliver, I share knowledge.",
-    "location": "Remote · Grenoble · Lyon",
-    "cta": "Let's discuss your project"
+    "subtitle": "Passionate fullstack developer",
+    "description": "I share my knowledge, case studies and projects. Need guidance? I'll point you in the right direction."
   },
   "services": {
     "refactoring": "Refactoring & DX",
@@ -110,6 +107,7 @@
     "parcours": "Career path",
     "competences": "Skills",
     "caseStudies": "Case studies",
+    "theia": "Fullstack developer with Symfony & Vue.js on a secure online assessment and examination platform.",
     "viseo": "Hexagonal architecture for a React application in a banking environment. Technical documentation adopted as internal reference.",
     "tudigo": "Hexagonal architecture and NX monorepo to modernize the website. Pair programming and code reviews.",
     "artelia": "Complete refactoring of a React application, 10x performance improvement. Mentoring a junior developer towards freelancing.",
@@ -126,7 +124,7 @@
   },
   "dimitri": {
     "title": "About Dimitri",
-    "p1": "My name is Dimitri. I've been a frontend developer since 2019, based in Grenoble, at the foot of the mountains.",
+    "p1": "My name is Dimitri. I've been a fullstack developer since 2019, based in Grenoble, at the foot of the mountains.",
     "p2": "My path isn't linear — I'm proud of it, and my story reflects well the person and professional I am today.",
     "p3": "Placed in child welfare services, I had to build my life brick by brick with resilience and tenacity.",
     "p4": "In high school, I was learning PHP with Le Site du Zéro: I was certain I'd become a developer, and I couldn't wait! But when I flew to Tokyo in 2013, I discovered an even stronger passion for aviation. I had no diploma and an empty wallet, but I worked incredibly hard to become an airline pilot. Everything suggested it was beyond my reach, but I ignored all prejudices and barriers to bet on myself and my determination.",
