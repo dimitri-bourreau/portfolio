@@ -39,6 +39,22 @@ const projects: Project[] = [
     stack: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'Firebase', 'TipTap'],
   },
   {
+    name: 'Temos',
+    descKey: 'temos_desc',
+    url: 'https://temos-tawny.vercel.app/',
+    github: 'https://github.com/dimitri-bourreau/temos',
+    image: '/projets/temos.png',
+    stack: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Tailwind',
+      'Zustand',
+      'Dexie',
+      'Recharts',
+    ],
+  },
+  {
     name: 'Relix',
     descKey: 'relix_desc',
     url: 'https://relix-inky.vercel.app',
