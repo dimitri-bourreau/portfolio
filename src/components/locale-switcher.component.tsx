@@ -16,7 +16,7 @@ export function LocaleSwitcher() {
   return (
     <button
       onClick={switchLocale}
-      className="border-border hover:bg-accent hover:text-bg cursor-pointer border-l px-4 py-4 text-xs font-bold tracking-widest uppercase transition-colors"
+      className="border-border hover:bg-tertiary hover:text-bg cursor-pointer border-l px-4 py-4 text-xs font-bold tracking-widest uppercase transition-colors"
     >
       {locale === 'fr' ? 'EN' : 'FR'}
     </button>

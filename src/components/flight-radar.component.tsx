@@ -67,7 +67,7 @@ export function FlightRadar() {
               bottom: '-260px',
               left: '-260px',
               background:
-                'conic-gradient(from -50deg at 50% 50%, transparent 0deg, rgba(37, 99, 235, 0.08) 35deg, transparent 50deg)',
+                'conic-gradient(from -50deg at 50% 50%, transparent 0deg, oklch(from var(--color-tertiary) l c h / 15%) 35deg, transparent 50deg)',
             }}
           />
           {/* Sweep line - starts at center, extends upward */}
@@ -77,7 +77,7 @@ export function FlightRadar() {
               width: '2px',
               height: '260px',
               background:
-                'linear-gradient(to top, var(--color-accent), transparent)',
+                'linear-gradient(to top, var(--color-tertiary), transparent)',
             }}
           />
         </div>
@@ -114,7 +114,7 @@ export function FlightRadar() {
           >
             {/* Ping animation - absolutely centered on this point */}
             <div
-              className="blip-ping bg-accent absolute rounded-full"
+              className="blip-ping bg-tertiary absolute rounded-full"
               style={{
                 width: '40px',
                 height: '40px',
@@ -124,7 +124,7 @@ export function FlightRadar() {
             />
             {/* Core dot - centered on the point */}
             <div
-              className="bg-accent absolute rounded-full shadow-[0_0_10px_var(--color-accent)]"
+              className="bg-tertiary absolute rounded-full shadow-[0_0_10px_var(--color-tertiary)]"
               style={{
                 width: '10px',
                 height: '10px',
@@ -153,7 +153,7 @@ export function FlightRadar() {
       <div className="text-muted absolute top-4 left-4 font-mono text-[11px]">
         <div>LAT 45.1885°N</div>
         <div>LON 5.7245°E</div>
-        <div className="text-accent mt-1 font-bold">{t('grenoble')}</div>
+        <div className="text-tertiary mt-1 font-bold">{t('grenoble')}</div>
       </div>
       <div className="text-muted absolute right-4 bottom-4 text-right font-mono text-[10px]">
         <div>UTC+1</div>

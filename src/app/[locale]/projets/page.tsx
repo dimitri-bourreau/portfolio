@@ -137,14 +137,14 @@ export default async function ProjetsPage() {
                 <a
                   href={project.url}
                   rel="noopener noreferrer"
-                  className="hover:bg-accent hover:text-bg border-border border px-4 py-2 text-xs font-medium transition-colors"
+                  className="hover:bg-tertiary hover:text-bg border-border border px-4 py-2 text-xs font-medium transition-colors"
                 >
                   {t('viewSite')}
                 </a>
                 <a
                   href={project.github}
                   rel="noopener noreferrer"
-                  className="hover:bg-accent hover:text-bg border-border border px-4 py-2 text-xs font-medium transition-colors"
+                  className="hover:bg-tertiary hover:text-bg border-border border px-4 py-2 text-xs font-medium transition-colors"
                 >
                   GitHub
                 </a>

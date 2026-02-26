@@ -30,7 +30,7 @@ export function Header() {
           <Link
             key={item.href}
             href={item.href}
-            className="border-border hover:bg-accent hover:text-bg cursor-pointer border-r px-3 py-4 text-xs tracking-wider uppercase transition-colors lg:px-5"
+            className="border-border hover:bg-tertiary hover:text-bg cursor-pointer border-r px-3 py-4 text-xs tracking-wider uppercase transition-colors lg:px-5"
           >
             {t(item.key)}
           </Link>

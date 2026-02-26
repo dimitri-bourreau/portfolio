@@ -23,7 +23,7 @@ export function TopArticles() {
           <Link
             key={article.slug}
             href={`/blog/${article.slug}`}
-            className="border-border hover:bg-accent hover:text-bg border px-3 py-2 text-xs transition-colors"
+            className="border-border hover:bg-tertiary hover:text-bg border px-3 py-2 text-xs transition-colors"
           >
             {t(article.key)}
           </Link>

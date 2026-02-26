@@ -14,7 +14,7 @@ const situationKeys = [
 ] as const
 
 const inputClass =
-  'border-border bg-bg focus:border-fg w-full border px-4 py-3 text-sm outline-none'
+  'border-border bg-bg focus:border-tertiary w-full border px-4 py-3 text-sm outline-none'
 const labelClass = 'mb-2 block text-xs font-bold tracking-widest uppercase'
 
 export function ContactForm() {
@@ -110,7 +110,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={pending}
-        className="bg-accent text-bg hover:bg-bg hover:text-accent border-accent cursor-pointer border px-8 py-3 text-xs font-bold tracking-widest uppercase transition-colors disabled:opacity-50"
+        className="bg-tertiary text-bg hover:bg-bg hover:text-tertiary border-tertiary cursor-pointer border px-8 py-3 text-xs font-bold tracking-widest uppercase transition-colors disabled:opacity-50"
       >
         {pending ? t('formSending') : t('formSubmit')}
       </button>

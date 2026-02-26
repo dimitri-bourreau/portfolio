@@ -54,7 +54,7 @@ export const BlogList = ({ posts }: BlogListProps) => {
             onClick={() => toggleTag(tag)}
             className={`border-border cursor-pointer border px-3 py-1 text-xs transition-colors ${
               selectedTags.includes(tag)
-                ? 'bg-accent text-bg'
+                ? 'bg-tertiary text-bg'
                 : 'text-muted hover:text-fg'
             }`}
           >
@@ -76,7 +76,7 @@ export const BlogList = ({ posts }: BlogListProps) => {
                     className="group block pl-4"
                   >
                     <div className="flex items-baseline justify-between gap-4">
-                      <h3 className="text-fg group-hover:text-accent text-sm transition-colors">
+                      <h3 className="text-fg group-hover:text-tertiary text-sm transition-colors">
                         {post.title}
                       </h3>
                       <time className="text-muted shrink-0 text-xs">

@@ -10,7 +10,7 @@
   --color-accent: oklch(0.5 0.08 50);
   --color-accent-muted: oklch(0.5 0.08 50 / 15%);
   --color-secondary: oklch(0.6 0.06 30);
-  --color-tertiary: oklch(0.55 0.07 70);
+  --color-tertiary: oklch(0.55 0.12 250);
   --font-mono: var(--font-jetbrains);
 }
 
@@ -23,7 +23,7 @@
     --color-accent: oklch(0.72 0.07 50);
     --color-accent-muted: oklch(0.72 0.07 50 / 15%);
     --color-secondary: oklch(0.75 0.06 30);
-    --color-tertiary: oklch(0.7 0.06 70);
+    --color-tertiary: oklch(0.72 0.1 250);
   }
 }
 

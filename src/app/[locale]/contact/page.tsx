@@ -19,7 +19,7 @@ export default async function ContactPage() {
       <section className="flex flex-col">
         <a
           href="mailto:hello@dimitribourreau.dev"
-          className="border-border hover:bg-accent hover:text-bg group flex-1 cursor-pointer border-b p-8 transition-colors"
+          className="border-border hover:bg-tertiary hover:text-bg group flex-1 cursor-pointer border-b p-8 transition-colors"
         >
           <h2 className="mb-2 text-sm font-bold uppercase">
             {t('emailLabel')}
@@ -30,7 +30,7 @@ export default async function ContactPage() {
         </a>
         <a
           href="https://www.linkedin.com/in/dimitri-bourreau/"
-          className="border-border hover:bg-accent hover:text-bg group flex-1 cursor-pointer border-b p-8 transition-colors"
+          className="border-border hover:bg-tertiary hover:text-bg group flex-1 cursor-pointer border-b p-8 transition-colors"
         >
           <h2 className="mb-2 text-sm font-bold uppercase">LinkedIn</h2>
           <p className="text-muted group-hover:text-bg text-xs leading-relaxed">
@@ -39,7 +39,7 @@ export default async function ContactPage() {
         </a>
         <a
           href="https://www.malt.fr/profile/dimitribourreau"
-          className="border-border hover:bg-accent hover:text-bg group flex-1 cursor-pointer p-8 transition-colors"
+          className="border-border hover:bg-tertiary hover:text-bg group flex-1 cursor-pointer p-8 transition-colors"
         >
           <h2 className="mb-2 text-sm font-bold uppercase">Malt</h2>
           <p className="text-muted group-hover:text-bg text-xs leading-relaxed">

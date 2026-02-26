@@ -141,7 +141,7 @@ function ResourceSection({
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="border-border hover:bg-accent hover:text-bg group flex gap-6 border-b px-4 py-4 transition-colors"
+            className="border-border hover:bg-tertiary hover:text-bg group flex gap-6 border-b px-4 py-4 transition-colors"
           >
             <h3 className="w-48 shrink-0 text-sm font-bold uppercase">
               {item.titleKey ? t(item.titleKey) : item.title}
@@ -161,7 +161,7 @@ export default async function RessourcesPage() {
 
   return (
     <>
-      <div className="text-accent border-border border-l-accent flex items-center justify-between border-b border-l-4 px-8 py-6">
+      <div className="text-accent border-border border-l-tertiary flex items-center justify-between border-b border-l-4 px-8 py-6">
         <h1 className="text-lg font-bold tracking-widest uppercase">
           {t('title')}
         </h1>

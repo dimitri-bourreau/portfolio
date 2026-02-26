@@ -70,7 +70,7 @@ export default async function ExperiencePage() {
         <a
           href={t('cvUrl')}
           download
-          className="border-border hover:bg-accent hover:text-bg border px-4 py-2 text-xs font-medium transition-colors"
+          className="border-border hover:bg-tertiary hover:text-bg border px-4 py-2 text-xs font-medium transition-colors"
         >
           {t('downloadCv')}
         </a>
@@ -114,7 +114,7 @@ export default async function ExperiencePage() {
                         <Link
                           key={caseStudy.slug}
                           href={`/blog/${caseStudy.slug}`}
-                          className="text-accent text-xs hover:underline"
+                          className="text-tertiary text-xs hover:underline"
                         >
                           → {t(caseStudy.titleKey)}
                         </Link>

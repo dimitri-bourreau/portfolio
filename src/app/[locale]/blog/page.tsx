@@ -12,12 +12,12 @@ export default async function BlogPage() {
 
   return (
     <>
-      <div className="text-accent border-border border-l-accent flex items-center justify-between border-b border-l-4 px-8 py-6">
+      <div className="text-accent border-border border-l-tertiary flex items-center justify-between border-b border-l-4 px-8 py-6">
         <h1 className="text-lg font-bold tracking-widest uppercase">Blog</h1>
         <a
           href="/feed.xml"
           rel="noopener noreferrer"
-          className="border-border text-fg hover:bg-accent hover:text-bg border px-3 py-1.5 text-xs transition-colors"
+          className="border-border text-fg hover:bg-tertiary hover:text-bg border px-3 py-1.5 text-xs transition-colors"
           title="RSS Feed"
         >
           [RSS]

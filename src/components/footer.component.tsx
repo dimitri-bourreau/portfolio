@@ -21,7 +21,7 @@ export function Footer() {
           <a
             key={link.label}
             href={link.href}
-            className="border-border hover:bg-accent hover:text-bg border-b px-4 py-3 text-xs tracking-wider uppercase transition-colors md:border-r md:border-b-0"
+            className="border-border hover:bg-tertiary hover:text-bg border-b px-4 py-3 text-xs tracking-wider uppercase transition-colors md:border-r md:border-b-0"
           >
             {link.label}
           </a>

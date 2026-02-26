@@ -8,7 +8,7 @@ export function HeroSection() {
       <h1 className="mb-6 text-4xl font-bold tracking-tight uppercase md:text-5xl">
         {t('title')}
       </h1>
-      <p className="text-accent mb-4 text-base font-bold">{t('subtitle')}</p>
+      <p className="text-tertiary mb-4 text-base font-bold">{t('subtitle')}</p>
       <p className="text-muted max-w-md text-sm leading-relaxed">
         {t('description')}
       </p>
